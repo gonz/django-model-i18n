@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if has_change_permission_orig or has_change_permission and change and original.i18n_languages %}
+<div class="submit-row">
+  <h4 style="float: left;">{{ _("Internationalization") }}</h4>
+  {% for code, name in original.i18n_languages %}
+    {% if lang == code or not trans and original.i18n_default_language == code %}
+      <strong>{{ name }}</strong>
+    {% else %}
+      <a title="{{ name }}" href="{% if trans %}../{% endif %}{{ code }}/">{{ name }}</a>
+    {% endif %}
+    {% if not forloop.last %}|{% endif %}
+  {% endfor %}
+</div>
+{% else %}
+  {{ block.super }}
+{% endif %}

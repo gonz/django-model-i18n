@@ -1,0 +1,20 @@
+{% extends "i18n/admin/change_form.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+{% if original %}
+<div class="breadcrumbs">
+   <a href="../../../../">{% trans "Home" %}</a> &rsaquo;
+   <a href="../../../">{{ app_label|capfirst|escape }}</a> &rsaquo; 
+   {% if has_change_permission_orig %}
+     <a href="../../">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+     <a href="../">{{ original|truncatewords:"18" }}</a>{% if trans %} &rsaquo;{% endif %}
+   {% else %}
+     {{ opts.verbose_name_plural|capfirst }} &rsaquo;
+     {{ original|truncatewords:"18" }}</a>{% if trans %} &rsaquo;{% endif %}
+   {% endif %}
+   {{ current_language|title }}
+</div>
+{% else %}{{ block.super }}{% endif %}{% endblock %}
+
+{% block object-tools %}{% endblock %}
